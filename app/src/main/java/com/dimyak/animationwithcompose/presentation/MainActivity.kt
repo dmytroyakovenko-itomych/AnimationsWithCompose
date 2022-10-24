@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import com.dimyak.animationwithcompose.presentation.common.ui.theme.AnimationWithComposeTheme
 import com.dimyak.animationwithcompose.presentation.examples.animateAsState.AnimateColorAsStateScreen
 import com.dimyak.animationwithcompose.presentation.examples.animated_circle.AnimatedCircleViewModel
+import com.dimyak.animationwithcompose.presentation.examples.keyframes.KeyframesScreen
 
 class MainActivity : ComponentActivity() {
     private val animatedCircleViewModel by viewModels<AnimatedCircleViewModel>()
@@ -15,7 +16,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AnimationWithComposeTheme {
-                AnimateColorAsStateScreen()
+                KeyframesScreen()
                 //AnimatedCircleScreen(animatedCircleViewModel)
             }
         }
