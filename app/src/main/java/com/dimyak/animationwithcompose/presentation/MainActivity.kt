@@ -9,6 +9,7 @@ import com.dimyak.animationwithcompose.presentation.examples.animateAsState.Anim
 import com.dimyak.animationwithcompose.presentation.examples.animateVisibility.AnimateVisibilityAdvanced
 import com.dimyak.animationwithcompose.presentation.examples.animateVisibility.AnimateVisibilityScreen
 import com.dimyak.animationwithcompose.presentation.examples.animated_circle.AnimatedCircleViewModel
+import com.dimyak.animationwithcompose.presentation.examples.crossfade.CrossfadeScreen
 import com.dimyak.animationwithcompose.presentation.examples.keyframes.KeyframesScreen
 
 class MainActivity : ComponentActivity() {
@@ -18,7 +19,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AnimationWithComposeTheme {
-                AnimateVisibilityAdvanced()
+                CrossfadeScreen()
                 //AnimatedCircleScreen(animatedCircleViewModel)
             }
         }
