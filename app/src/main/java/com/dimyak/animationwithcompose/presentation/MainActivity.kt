@@ -11,6 +11,7 @@ import com.dimyak.animationwithcompose.presentation.examples.animateVisibility.A
 import com.dimyak.animationwithcompose.presentation.examples.animated_circle.AnimatedCircleViewModel
 import com.dimyak.animationwithcompose.presentation.examples.crossfade.CrossfadeScreen
 import com.dimyak.animationwithcompose.presentation.examples.keyframes.KeyframesScreen
+import com.dimyak.animationwithcompose.presentation.examples.transition.TransitionScreen
 
 class MainActivity : ComponentActivity() {
     private val animatedCircleViewModel by viewModels<AnimatedCircleViewModel>()
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AnimationWithComposeTheme {
-                CrossfadeScreen()
+                TransitionScreen()
                 //AnimatedCircleScreen(animatedCircleViewModel)
             }
         }
