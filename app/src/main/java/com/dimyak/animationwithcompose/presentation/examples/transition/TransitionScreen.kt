@@ -1,5 +1,7 @@
 package com.dimyak.animationwithcompose.presentation.examples.transition
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
@@ -23,6 +25,7 @@ import androidx.compose.ui.unit.dp
 
 enum class ComponentState { Pressed, Released }
 
+@OptIn(ExperimentalTransitionApi::class)
 @Composable
 fun TransitionScreen() {
     var useRed by remember { mutableStateOf(false) }
@@ -36,7 +39,8 @@ fun TransitionScreen() {
             }
         )
     }
-    val transition: Transition<ComponentState> = updateTransition(targetState = toState, label = "transition")
+    val transition: Transition<ComponentState> =
+        updateTransition(targetState = toState, label = "transition")
 // Defines a float animation as a child animation the transition. The current animation value
 // can be read from the returned State<Float>.
     val scale: Float by transition.animateFloat(
@@ -82,12 +86,33 @@ fun TransitionScreen() {
         ) {
             Text("Change Color")
         }
-        Box(
-            modifier
+        AnimatedBox(
+            modifier = modifier
                 .fillMaxSize()
                 .wrapContentSize(Alignment.Center)
                 .size((100 * scale).dp)
-                .background(color)
+                .background(color),
+            isPressedTransition = transition.createChildTransition { componentState ->
+                componentState == ComponentState.Pressed
+            }
         )
+    }
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+fun AnimatedBox(
+    modifier: Modifier,
+    isPressedTransition: Transition<Boolean>
+) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
+        isPressedTransition.AnimatedVisibility(visible = { isPressed ->
+            isPressed
+        }) {
+            Text(text = "Pressed")
+        }
     }
 }

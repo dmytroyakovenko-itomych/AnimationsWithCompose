@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AnimationWithComposeTheme {
-                TransitionScreenV2()
+                TransitionScreen()
                 //AnimatedCircleScreen(animatedCircleViewModel)
             }
         }
