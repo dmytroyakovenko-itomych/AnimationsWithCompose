@@ -1,4 +1,4 @@
-package com.dimyak.animationwithcompose.ui.theme
+package com.dimyak.animationwithcompose.presentation.common.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AnimationWithCompose</string>
+    <plurals name="people_nearby_count_title">
+        <item quantity="one">%d Person Nearby</item>
+        <item quantity="other">%d People Nearby</item>
+    </plurals>
 </resources>
