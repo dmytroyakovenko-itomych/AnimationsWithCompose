@@ -1,19 +1,21 @@
 package com.dimyak.animationwithcompose.presentation.examples.animateAsState
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 
@@ -33,41 +35,38 @@ fun ColorState.next(): ColorState {
 @Composable
 fun AnimateColorAsStateScreen() {
     Scaffold { paddingValues ->
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues),
-            contentAlignment = Alignment.Center
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            var state by remember { mutableStateOf(ColorState.RED) }
+            var useRed by remember { mutableStateOf(false) }
+
             val color by animateColorAsState(
-                targetValue = when (state) {
-                    ColorState.RED -> Color.Red
-                    ColorState.GREEN -> Color.Green
-                    ColorState.BLUE -> Color.Blue
-                },
+                targetValue = if (useRed) Color.Red else Color.Blue,
                 animationSpec = tween(
-                    durationMillis = stateChangeInterval,
+                    durationMillis = 1500,
                     easing = LinearEasing
                 ),
+                finishedListener = { color ->
+
+                }
             )
+
             Box(
-                modifier = Modifier
+                Modifier
                     .size(100.dp)
-                    .drawBehind {
-                        drawRect(color)
-                    },
-                contentAlignment = Alignment.Center
-            ) {
-                Text(text = state.name, color = Color.White)
+                    .background(color)
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(onClick = { useRed = !useRed }) {
+                Text(text = "Change color")
             }
 
-            LaunchedEffect(Unit) {
-                while (true) {
-                    delay(stateChangeInterval.toLong())
-                    state = state.next()
-                }
-            }
         }
     }
 }
