@@ -55,7 +55,7 @@ fun CircleWithButton(
 
         circleTransition.AnimatedVisibility(
             visible = { state ->
-                state.nearbyPeopleButtonVisible
+                state.isButtonVisible
             },
             enter = fadeIn(),
             exit = fadeOut(),
@@ -63,7 +63,7 @@ fun CircleWithButton(
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 16.dp)
         ) {
-            val expand = circleTransition.targetState.nearbyPeopleButtonExpand
+            val expand = circleTransition.targetState.isButtonInExpandState
             NearbyPeopleAnimatedButton(
                 expand = expand,
                 count = nearbyPeople.size,
@@ -82,7 +82,7 @@ fun CircleWithButton(
 /**
  * Map [AnimatedCircleState] into [NearbyPeopleAnimatedButton]'s visibility.
  */
-private val AnimatedCircleState.nearbyPeopleButtonVisible
+private val AnimatedCircleState.isButtonVisible
     get() = this == AnimatedCircleState.BUTTON_VISIBLE || this == AnimatedCircleState.CIRCLE_VISIBLE
 
 /**
@@ -91,5 +91,5 @@ private val AnimatedCircleState.nearbyPeopleButtonVisible
  * In expanding mode, the [NearbyPeopleAnimatedButton] will display the count of the nearby people.
  * In collapse mode, the [NearbyPeopleAnimatedButton] will display the close circle icon.
  */
-private val AnimatedCircleState.nearbyPeopleButtonExpand
+private val AnimatedCircleState.isButtonInExpandState
     get() = this == AnimatedCircleState.BUTTON_VISIBLE || this == AnimatedCircleState.INITIAL
