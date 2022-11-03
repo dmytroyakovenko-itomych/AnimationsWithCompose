@@ -120,7 +120,7 @@ private fun BoxScope.UserPin(
         )
     }
 }
-
+//TODO: Instead of the delay approach, use Animatable!!
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun NearbyPeoplePins(

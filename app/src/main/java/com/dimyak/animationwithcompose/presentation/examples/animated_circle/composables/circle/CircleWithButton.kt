@@ -36,6 +36,9 @@ fun CircleWithButton(
         val circleTransition = updateTransition(
             targetState = circleState, "circleTransition"
         )
+        val expandTransition = circleTransition.createChildTransition {
+            it.isButtonInExpandState
+        }
 
         LaunchedEffect(nearbyPeople, showCircle) {
             if (nearbyPeople.isNotEmpty()) {
@@ -63,12 +66,11 @@ fun CircleWithButton(
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 16.dp)
         ) {
-            val expand = circleTransition.targetState.isButtonInExpandState
             NearbyPeopleAnimatedButton(
-                expand = expand,
+                expand = expandTransition.targetState,
                 count = nearbyPeople.size,
                 onClick = {
-                    if (expand) {
+                    if (expandTransition.targetState) {
                         showCircleClicked()
                     } else {
                         hideCircleClicked()
